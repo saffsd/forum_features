@@ -32,7 +32,6 @@ setup(name='forum_features',
     zip_safe=False,
     install_requires=install_requires,
     entry_points={
-        'console_scripts':
-            ['forum_features=forum_features:main']
+        'console_scripts': []
     }
 )
