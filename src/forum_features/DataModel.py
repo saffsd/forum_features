@@ -277,7 +277,7 @@ class Post(object):
     self.token_index = None
     self.tokenizer = None
     self.thread = thread
-
+ 
   def __eq__(self, other):
     return self.id == other.id
 
@@ -292,6 +292,10 @@ class Post(object):
 
   def __str__(self):
     return "<post %s by '%s' %d sentences>"% (str(self.id), self.author, len(self.sentences))
+
+  @property
+  def position(self):
+    return self.thread.posts.index(self)
 
   @property
   def xml(self):
@@ -334,14 +338,14 @@ class Post(object):
       self.token_index[token] += 1
 
   def prev_by_thread(self):
-    index = self.thread.posts.index(self)
+    index = self.position
     if index == 0:
       return None
     else:
       return self.thread.posts[index - 1]
 
   def next_by_thread(self):
-    index = self.thread.posts.index(self)
+    index = self.position
     if index == (len(self.thread.posts) -1):
       return None
     else:
